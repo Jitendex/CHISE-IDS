@@ -32,6 +32,8 @@
 			  (cons product ret))
       (when (setq ret (char-feature component 'ideographic-structure))
 	(ids-index-store-structure product ret))
+      (when (setq ret (char-feature component 'ideographic-structure@shuowen))
+	(ids-index-store-structure product ret))
       (when (setq ret (char-feature component 'ideographic-structure@apparent))
 	(ids-index-store-structure product ret))
       (when (setq ret (char-feature component 'ideographic-structure@apparent/leftmost))
@@ -51,6 +53,8 @@
       (cond ((characterp cell)
 	     (ids-index-store-char product cell))
 	    ((setq ret (assq 'ideographic-structure cell))
+	     (ids-index-store-structure product (cdr ret)))
+	    ((setq ret (assq 'ideographic-structure@shuowen cell))
 	     (ids-index-store-structure product (cdr ret)))
 	    ((setq ret (assq 'ideographic-structure@apparent cell))
 	     (ids-index-store-structure product (cdr ret)))
@@ -72,6 +76,11 @@
      (ids-index-store-structure c v)
      nil)
    'ideographic-structure)
+  (map-char-attribute
+   (lambda (c v)
+     (ids-index-store-structure c v)
+     nil)
+   'ideographic-structure@shuowen)
   (map-char-attribute
    (lambda (c v)
      (ids-index-store-structure c v)
@@ -647,6 +656,9 @@
 			 (< (cdr a)(cdr b))))))
       (when (or (and (setq str
 			   (get-char-attribute pc 'ideographic-structure))
+		     (ideographic-structure-equal str structure))
+		(and (setq str
+			   (get-char-attribute pc 'ideographic-structure@shuowen))
 		     (ideographic-structure-equal str structure))
 		(and (setq str
 			   (get-char-attribute pc 'ideographic-structure@apparent))
@@ -1762,6 +1774,7 @@ COMPONENT can be a character or char-spec."
       (when (setq enc-str
 		  (cond ((characterp enc)
 			 (or (get-char-attribute enc 'ideographic-structure)
+			     (get-char-attribute enc 'ideographic-structure@shuowen)
 			     (get-char-attribute enc 'ideographic-structure@apparent)
 			     (get-char-attribute enc 'ideographic-structure@apparent/leftmost)
 			     (get-char-attribute enc 'ideographic-structure@apparent/rightmost)
@@ -1769,6 +1782,7 @@ COMPONENT can be a character or char-spec."
 			 )
 			((consp enc)
 			 (or (cdr (assq 'ideographic-structure enc))
+			     (cdr (assq 'ideographic-structure@shuowen enc))
 			     (cdr (assq 'ideographic-structure@apparent enc))
 			     (cdr (assq 'ideographic-structure@apparent/leftmost enc))
 			     (cdr (assq 'ideographic-structure@apparent/rightmost enc))
