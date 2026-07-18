@@ -115,6 +115,19 @@
   (map-char-attribute
    (lambda (c v)
      (unless (equal (setq ret (ideographic-structure-compact v)) v)
+       (princ (format "Compact %04X (%c) : [shuowen] %s -> %s\n"
+		      (char-int c)
+		      c
+		      (ideographic-structure-to-ids v)
+		      (ideographic-structure-to-ids ret)))
+       (put-char-attribute c 'ideographic-structure@shuowen ret)
+       (setq v ret))
+     nil)
+   'ideographic-structure@shuowen)
+
+  (map-char-attribute
+   (lambda (c v)
+     (unless (equal (setq ret (ideographic-structure-compact v)) v)
        (princ (format "Compact %04X (%c) : [apparent] %s -> %s\n"
 		      (char-int c)
 		      c
