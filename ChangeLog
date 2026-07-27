@@ -1,3 +1,22 @@
+2026-07-22  MORIOKA Tomohiko  <tomo.git@chise.org>
+
+	* IDS-UCS-Basic.txt (U+5BE9): Modify structure; preserve the
+	previous IDS as an apparent structure.
+	(U+9751): Add IDS.
+	(U+9752): Add IDS.
+
+2026-07-18  MORIOKA Tomohiko  <tomo.git@chise.org>
+
+	* install-ids.el: Add code to compact
+	`ideographic-structure@shuowen'.
+
+	* ids-find.el (ids-index-store-char): Refer
+	`ideographic-structure@shuowen'.
+	(ids-index-store-structure): Likewise.
+	(ids-update-index): Likewise.
+	(ideographic-structure-find-chars): Likewise.
+	(ideographic-structure-compare-functional-and-apparent): Likewise.
+
 2026-07-14  MORIOKA Tomohiko  <tomo.git@chise.org>
 
 	* IDS-UCS-Basic.txt (U+5360): Use U+53E3[mouth] instead of
