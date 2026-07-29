@@ -1,3 +1,7 @@
+2026-07-27  MORIOKA Tomohiko  <tomo.git@chise.org>
+
+	* IDS-SW-JIGUGE.txt (SW-JIGUGE-03405): Modify structure.
+
 2026-07-22  MORIOKA Tomohiko  <tomo.git@chise.org>
 
 	* IDS-UCS-Basic.txt (U+5BE9): Modify structure; preserve the
